@@ -3,7 +3,7 @@ import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
 import { Card, IconButton, Text, useTheme } from 'react-native-paper'
 
-import { CanadianBadge } from '@/lib/ui/components/marketplace'
+import CanadianBadge from './CanadianBadge'
 
 interface ProductCardProps {
   id: string

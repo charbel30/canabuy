@@ -1,6 +1,6 @@
 import { router } from 'expo-router'
 import React, { useState } from 'react'
-import { ScrollView, View } from 'react-native'
+import { View, FlatList } from 'react-native'
 import { Text } from 'react-native-paper'
 
 import { GradientBackground } from '@/lib'
@@ -50,26 +50,32 @@ const MarketplaceScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <GradientBackground height="full" />
-      <ScrollView>
-        <View style={{ padding: 16 }}>
-          <SearchBar
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            placeholder="Search Canadian products..."
-            onSubmit={handleSearchSubmit}
-          />
+      <FlatList
+        data={mockProducts}
+        renderItem={({ item }) => null} // ProductGrid will handle actual rendering
+        ListHeaderComponent={() => (
+          <View style={{ padding: 16 }}>
+            <SearchBar
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              placeholder="Search Canadian products..."
+              onSubmit={handleSearchSubmit}
+            />
 
-          <Text variant="titleMedium" style={{ marginVertical: 16 }}>
-            Browse Categories
-          </Text>
-          <CategoryList categories={mockCategories} />
+            <Text variant="titleMedium" style={{ marginVertical: 16 }}>
+              Browse Categories
+            </Text>
+            <CategoryList categories={mockCategories} />
 
-          <Text variant="titleMedium" style={{ marginVertical: 16 }}>
-            Featured Products
-          </Text>
+            <Text variant="titleMedium" style={{ marginVertical: 16 }}>
+              Featured Products
+            </Text>
+          </View>
+        )}
+        ListFooterComponent={() => (
           <ProductGrid products={mockProducts} />
-        </View>
-      </ScrollView>
+        )}
+      />
     </View>
   )
 }

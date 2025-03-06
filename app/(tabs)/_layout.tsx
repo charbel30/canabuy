@@ -101,7 +101,7 @@ const TabLayout = () => {
               <Tooltip title={Locales.t('search')}>
                 <Appbar.Action
                   icon="magnify"
-                  onPress={() => router.push('/marketplace/search')}
+                  onPress={() => router.push('/search')}
                 />
               </Tooltip>
             </>
