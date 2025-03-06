@@ -51,11 +51,6 @@ const TabLayout = () => {
                   leadingIcon="card-multiple-outline"
                   onPress={() => router.push('/modal')}
                 />
-                <Menu.Item
-                  title={Locales.t('drawerNav')}
-                  leadingIcon="gesture-swipe"
-                  onPress={() => router.push('/drawer')}
-                />
               </Menu>
             </>
           ),
@@ -98,17 +93,32 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
+        name="(marketplace)"
+        options={{
+          title: 'Marketplace',
+          headerRight: () => (
+            <>
+              <Tooltip title={Locales.t('search')}>
+                <Appbar.Action
+                  icon="magnify"
+                  onPress={() => router.push('/marketplace/search')}
+                />
+              </Tooltip>
+            </>
+          ),
+          tabBarIcon: (props) => (
+            <MaterialCommunityIcons
+              {...props}
+              size={24}
+              name={props.focused ? 'store' : 'store-outline'}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: Locales.t('titleSettings'),
-          headerRight: () => (
-            <Tooltip title={Locales.t('drawerNav')}>
-              <Appbar.Action
-                icon="gesture-swipe"
-                onPress={() => router.push('/drawer')}
-              />
-            </Tooltip>
-          ),
           tabBarIcon: (props) => (
             <MaterialCommunityIcons
               {...props}

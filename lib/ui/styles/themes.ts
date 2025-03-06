@@ -21,6 +21,13 @@ const BaseDarkTheme = {
 const Themes = {
   light: {
     default: BaseLightTheme,
+    canadian: {
+      ...BaseLightTheme,
+      colors: {
+        ...BaseLightTheme.colors,
+        ...Colors.light.canadian,
+      },
+    },
     orange: {
       ...BaseLightTheme,
       colors: {
@@ -101,6 +108,13 @@ const Themes = {
   },
   dark: {
     default: BaseDarkTheme,
+    canadian: {
+      ...BaseDarkTheme,
+      colors: {
+        ...BaseDarkTheme.colors,
+        ...Colors.dark.canadian,
+      },
+    },
     red: {
       ...BaseDarkTheme,
       colors: {
