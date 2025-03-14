@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Text, useTheme } from 'react-native-paper'
+import { StyleSheet, View, Animated } from 'react-native'
+import { Text, useTheme, Surface } from 'react-native-paper'
 
 interface CanadianBadgeProps {
   score: number
@@ -15,15 +15,47 @@ const CanadianBadge: React.FC<CanadianBadgeProps> = ({
   showLabel = true,
 }) => {
   const theme = useTheme()
-
+  const pulseAnim = React.useRef(new Animated.Value(1)).current
+  
+  React.useEffect(() => {
+    // Create a subtle pulse animation for high scores
+    if (score >= 90) {
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(pulseAnim, {
+            toValue: 1.1,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(pulseAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+        ])
+      ).start()
+    }
+  }, [score, pulseAnim])
+  
+  // Determine color based on score
+  const getScoreColor = () => {
+    if (score >= 90) return theme.colors.primary; // Excellent - maple red
+    if (score >= 75) return theme.colors.secondary; // Good - forest green
+    if (score >= 60) return theme.colors.tertiary; // Average - lake blue
+    return theme.colors.surfaceVariant; // Below average - neutral
+  };
+  
+  const badgeColor = getScoreColor();
+  
   const styles = StyleSheet.create({
     container: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: theme.colors.primary,
+      backgroundColor: badgeColor,
       paddingHorizontal: size === 'small' ? 6 : size === 'medium' ? 8 : 12,
       paddingVertical: size === 'small' ? 2 : size === 'medium' ? 4 : 6,
-      borderRadius: size === 'small' ? 4 : size === 'medium' ? 6 : 8,
+      borderRadius: 16, // More rounded for modern look
+      elevation: 4,
     },
     text: {
       color: theme.colors.onPrimary,
@@ -41,16 +73,22 @@ const CanadianBadge: React.FC<CanadianBadgeProps> = ({
   })
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{score}%</Text>
-      {showLabel && <Text style={styles.label}>Canadian</Text>}
-      <MaterialCommunityIcons
-        name="leaf-maple"
-        size={size === 'small' ? 14 : size === 'medium' ? 16 : 20}
-        color={theme.colors.onPrimary}
-        style={styles.icon}
-      />
-    </View>
+    <Animated.View
+      style={[
+        { transform: [{ scale: score >= 90 ? pulseAnim : 1 }] }
+      ]}
+    >
+      <Surface style={[styles.container, { elevation: 4 }]}>
+        <Text style={styles.text}>{score}%</Text>
+        {showLabel && <Text style={styles.label}>Canadian</Text>}
+        <MaterialCommunityIcons
+          name="leaf-maple"
+          size={size === 'small' ? 14 : size === 'medium' ? 16 : 20}
+          color={theme.colors.onPrimary}
+          style={styles.icon}
+        />
+      </Surface>
+    </Animated.View>
   )
 }
 

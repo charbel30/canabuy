@@ -14,7 +14,7 @@ const mockProducts = {
     description:
       'High-quality smart speaker designed and manufactured in Canada. Features voice control, premium sound, and seamless smart home integration.',
     price: 79.99,
-    imageUrl: 'https://placekitten.com/400/400',
+    imageUrl: require('@/assets/images/products/electronics/smart-speaker.jpg'),
     canadianScore: 85,
     seller: {
       id: 's1',
@@ -31,11 +31,11 @@ const mockProducts = {
   },
   '201': {
     id: '201',
-    name: 'Maple Syrup',
+    name: 'Pure Canadian Maple Syrup',
     description:
       'Pure Canadian maple syrup harvested from Quebec maple forests. 100% natural and traditionally processed.',
     price: 19.99,
-    imageUrl: 'https://placekitten.com/400/400',
+    imageUrl: require('@/assets/images/products/clothing/winter-jacket.jpg'),
     canadianScore: 95,
     seller: {
       id: 's2',
@@ -50,7 +50,90 @@ const mockProducts = {
       'Grade A quality',
     ],
   },
-  // Add more products as needed
+  '301': {
+    id: '301',
+    name: 'Winter Down Jacket',
+    description:
+      'Premium winter jacket designed for extreme Canadian winters. Ethically sourced down filling and water-resistant exterior.',
+    price: 199.99,
+    imageUrl: require('@/assets/images/products/clothing/winter-jacket.jpg'),
+    canadianScore: 90,
+    seller: {
+      id: 's3',
+      name: 'Northern Outfitters',
+      location: 'Alberta',
+      isVerified: true,
+    },
+    features: [
+      'Ethically sourced down filling',
+      'Water-resistant exterior',
+      'Designed for extreme cold',
+      'Made in Canada',
+    ],
+  },
+  '401': {
+    id: '401',
+    name: 'Handcrafted Wooden Bowl',
+    description:
+      'Handcrafted by Canadian artisans using locally sourced maple wood. Each piece is unique with natural grain patterns.',
+    price: 49.99,
+    imageUrl: require('@/assets/images/products/clothing/winter-jacket.jpg'),
+    canadianScore: 88,
+    seller: {
+      id: 's4',
+      name: 'Artisan Woodworks',
+      location: 'British Columbia',
+      isVerified: true,
+    },
+    features: [
+      'Handcrafted by local artisans',
+      'Sustainably sourced maple wood',
+      'Food-safe finish',
+      'Each piece is unique',
+    ],
+  },
+  '501': {
+    id: '501',
+    name: 'Organic Blueberry Jam',
+    description:
+      'Made with wild Canadian blueberries harvested from pristine forests. No artificial preservatives or additives.',
+    price: 12.99,
+    imageUrl: require('@/assets/images/products/food/blueberry-jam.jpg'),
+    canadianScore: 92,
+    seller: {
+      id: 's5',
+      name: 'Wild Harvest',
+      location: 'Nova Scotia',
+      isVerified: true,
+    },
+    features: [
+      'Wild Canadian blueberries',
+      'No artificial preservatives',
+      'Small-batch production',
+      'Sustainable harvesting practices',
+    ],
+  },
+  '601': {
+    id: '601',
+    name: 'Wireless Earbuds',
+    description:
+      'Premium wireless earbuds with noise cancellation and long battery life. Designed in Vancouver.',
+    price: 129.99,
+    imageUrl: require('@/assets/images/products/electronics/wireless-earbuds.jpg'),
+    canadianScore: 82,
+    seller: {
+      id: 's6',
+      name: 'West Coast Audio',
+      location: 'British Columbia',
+      isVerified: true,
+    },
+    features: [
+      'Active noise cancellation',
+      'Long battery life',
+      'Water-resistant design',
+      'Designed in Vancouver',
+    ],
+  },
 }
 
 const ProductScreen = () => {
@@ -84,7 +167,7 @@ const ProductScreen = () => {
         />
       </View>
       <ScrollView contentContainerStyle={styles.content}>
-        <Image source={{ uri: product.imageUrl }} style={styles.image} />
+        <Image source={product.imageUrl} style={styles.image} />
         <View style={styles.details}>
           <Text variant="headlineMedium">{product.name}</Text>
           <Text variant="headlineSmall" style={styles.price}>
