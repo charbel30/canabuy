@@ -246,49 +246,16 @@ const CategoryScreen = () => {
     console.log('Searching in category:', searchQuery)
   }
 
+  // Update the screen title with the category name
+  React.useEffect(() => {
+    if (category) {
+      router.setParams({ title: category.name });
+    }
+  }, [category, router]);
+
   return (
     <View style={{ flex: 1 }}>
       <GradientBackground height="full" />
-      
-      {/* App Bar */}
-      <Appbar.Header style={styles.appbar} elevated>
-        <Appbar.BackAction onPress={() => router.back()} />
-        <Appbar.Content 
-          title={category?.name} 
-          titleStyle={styles.appbarTitle}
-          subtitle={category?.description}
-          subtitleStyle={styles.appbarSubtitle}
-        />
-        <Appbar.Action icon="heart-outline" onPress={() => console.log('View wishlist')} />
-        <Menu
-          visible={menuVisible}
-          onDismiss={() => setMenuVisible(false)}
-          anchor={
-            <Appbar.Action 
-              icon="dots-vertical" 
-              onPress={() => setMenuVisible(true)} 
-            />
-          }
-          contentStyle={styles.menuContent}
-        >
-          <Menu.Item 
-            leadingIcon="sort" 
-            onPress={() => {
-              setMenuVisible(false)
-              setFilterModalVisible(true)
-            }} 
-            title="Sort & Filter" 
-          />
-          <Menu.Item 
-            leadingIcon="share-variant" 
-            onPress={() => {
-              setMenuVisible(false)
-              console.log('Share category')
-            }} 
-            title="Share" 
-          />
-        </Menu>
-      </Appbar.Header>
       
       {/* Search and Filters */}
       <View style={styles.searchContainer}>

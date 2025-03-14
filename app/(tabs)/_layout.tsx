@@ -96,16 +96,7 @@ const TabLayout = () => {
         name="(marketplace)"
         options={{
           title: 'Marketplace',
-          headerRight: () => (
-            <>
-              <Tooltip title={Locales.t('search')}>
-                <Appbar.Action
-                  icon="magnify"
-                  onPress={() => router.push('/search')}
-                />
-              </Tooltip>
-            </>
-          ),
+          headerShown: false, // Hide the header at the tab level to avoid duplication
           tabBarIcon: (props) => (
             <MaterialCommunityIcons
               {...props}

@@ -112,20 +112,31 @@ const RootLayoutNav = () => {
         <Stack
           screenOptions={{
             animation: 'slide_from_bottom',
-            header: (props) => (
-              <StackHeader navProps={props} children={undefined} />
-            ),
+            headerShown: false, // Hide headers at root level to avoid duplication
           }}
         >
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" />
+          <Stack.Screen name="(tabs)" />
           <Stack.Screen
             name="search"
-            options={{ title: Locales.t('search') }}
+            options={{ 
+              headerShown: true,
+              title: Locales.t('search'),
+              header: (props) => (
+                <StackHeader navProps={props} children={undefined} />
+              ),
+            }}
           />
           <Stack.Screen
             name="modal"
-            options={{ title: Locales.t('titleModal'), presentation: 'modal' }}
+            options={{ 
+              headerShown: true,
+              title: Locales.t('titleModal'), 
+              presentation: 'modal',
+              header: (props) => (
+                <StackHeader navProps={props} children={undefined} />
+              ),
+            }}
           />
         </Stack>
       </PaperProvider>

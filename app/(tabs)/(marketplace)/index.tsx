@@ -127,13 +127,15 @@ const MarketplaceScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         {/* Search Bar */}
-        <SearchBar
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          placeholder="Search Canadian products..."
-          onSubmit={handleSearchSubmit}
-          onFilterPress={handleFilterPress}
-        />
+        <View style={styles.searchBarContainer}>
+          <SearchBar
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            placeholder="Search Canadian products..."
+            onSubmit={handleSearchSubmit}
+            onFilterPress={handleFilterPress}
+          />
+        </View>
         
         {/* Featured Deals Carousel */}
         <View style={styles.featuredContainer}>
@@ -144,16 +146,19 @@ const MarketplaceScreen = () => {
             horizontal 
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.featuredScroll}
+            decelerationRate="fast"
+            snapToInterval={316} // card width + margin
+            snapToAlignment="center"
           >
             {featuredDeals.map(deal => (
               <Surface 
                 key={deal.id} 
                 style={styles.dealCard}
-                elevation={2}
+                elevation={4}
               >
                 <View style={styles.dealContent}>
-                  <Text variant="titleMedium">{deal.title}</Text>
-                  <Text variant="bodyMedium">{deal.description}</Text>
+                  <Text variant="titleMedium" style={styles.dealTitle}>{deal.title}</Text>
+                  <Text variant="bodyMedium" style={styles.dealDescription}>{deal.description}</Text>
                   <Button 
                     mode="contained" 
                     style={styles.dealButton}
@@ -257,6 +262,9 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: 24,
   },
+  searchBarContainer: {
+    marginBottom: 8,
+  },
   featuredContainer: {
     marginTop: 8,
     marginBottom: 16,
@@ -278,8 +286,15 @@ const styles = StyleSheet.create({
   dealContent: {
     padding: 16,
   },
+  dealTitle: {
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  dealDescription: {
+    opacity: 0.8,
+  },
   dealButton: {
-    marginTop: 8,
+    marginTop: 12,
     alignSelf: 'flex-start',
   },
   categoriesContainer: {

@@ -20,7 +20,10 @@ const GradientBackground = (props: { height?: 'full' }) => {
         <LinearGradient
           start={vec(0, 0)}
           end={vec(width, width)}
-          colors={[theme.colors.primary, theme.colors.inversePrimary]}
+          colors={[
+            theme.colors.background, 
+            theme.colors.surfaceVariant
+          ]}
         />
       </Rect>
     </Canvas>

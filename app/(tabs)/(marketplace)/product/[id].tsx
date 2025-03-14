@@ -1,7 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { Image, ScrollView, StyleSheet, View } from 'react-native'
-import { Button, Card, Divider, IconButton, Text } from 'react-native-paper'
+import { Button, Card, Divider, IconButton, Text, useTheme } from 'react-native-paper'
 
 import { GradientBackground } from '@/lib'
 import { CanadianBadge } from '@/lib/ui/components/marketplace'
@@ -139,6 +139,7 @@ const mockProducts = {
 const ProductScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>()
   const router = useRouter()
+  const theme = useTheme()
   const [isWishlisted, setIsWishlisted] = useState(false)
   const product = mockProducts[id as keyof typeof mockProducts]
 
@@ -154,26 +155,19 @@ const ProductScreen = () => {
   return (
     <View style={styles.container}>
       <GradientBackground height="full" />
-      <View style={styles.header}>
-        <IconButton
-          icon="arrow-left"
-          onPress={() => router.back()}
-          style={styles.backButton}
-        />
-        <IconButton
-          icon={isWishlisted ? 'heart' : 'heart-outline'}
-          onPress={() => setIsWishlisted(!isWishlisted)}
-          style={styles.wishlistButton}
-        />
-      </View>
-      <ScrollView contentContainerStyle={styles.content}>
+      <ScrollView 
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
         <Image source={product.imageUrl} style={styles.image} />
         <View style={styles.details}>
-          <Text variant="headlineMedium">{product.name}</Text>
+          <Text variant="headlineMedium" style={styles.productName}>{product.name}</Text>
           <Text variant="headlineSmall" style={styles.price}>
             ${product.price.toFixed(2)}
           </Text>
-          <CanadianBadge score={product.canadianScore} />
+          <View style={styles.badgeContainer}>
+            <CanadianBadge score={product.canadianScore} />
+          </View>
           <Text variant="bodyLarge" style={styles.description}>
             {product.description}
           </Text>
@@ -183,23 +177,29 @@ const ProductScreen = () => {
           <Text variant="titleMedium" style={styles.sectionTitle}>
             Features
           </Text>
-          {product.features.map((feature, index) => (
-            <Text key={index} variant="bodyMedium" style={styles.feature}>
-              • {feature}
-            </Text>
-          ))}
+          <View style={styles.featuresContainer}>
+            {product.features.map((feature, index) => (
+              <Text key={index} variant="bodyMedium" style={styles.feature}>
+                • {feature}
+              </Text>
+            ))}
+          </View>
 
           <Divider style={styles.divider} />
 
           <Text variant="titleMedium" style={styles.sectionTitle}>
             Seller Information
           </Text>
-          <Card style={styles.sellerCard}>
+          <Card style={styles.sellerCard} elevation={2}>
             <Card.Content>
               <View style={styles.sellerHeader}>
-                <Text variant="titleMedium">{product.seller.name}</Text>
+                <Text variant="titleMedium" style={styles.sellerName}>{product.seller.name}</Text>
                 {product.seller.isVerified && (
-                  <IconButton icon="check-decagram" size={20} />
+                  <IconButton 
+                    icon="check-decagram" 
+                    size={20} 
+                    iconColor={theme.colors.primary}
+                  />
                 )}
               </View>
               <Text variant="bodyMedium">Location: {product.seller.location}</Text>
@@ -212,6 +212,7 @@ const ProductScreen = () => {
               // Handle add to cart
             }}
             style={styles.addToCartButton}
+            icon="cart-plus"
           >
             Add to Cart
           </Button>
@@ -247,8 +248,16 @@ const styles = StyleSheet.create({
   details: {
     padding: 16,
   },
+  productName: {
+    fontWeight: 'bold',
+  },
   price: {
     marginTop: 8,
+    color: '#e53935', // A nice red color for price
+  },
+  badgeContainer: {
+    marginTop: 16,
+    marginBottom: 16,
   },
   badge: {
     marginTop: 16,
@@ -263,16 +272,24 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     marginBottom: 8,
+    fontWeight: 'bold',
+  },
+  featuresContainer: {
+    marginBottom: 8,
   },
   feature: {
     marginBottom: 4,
   },
   sellerCard: {
     marginTop: 8,
+    borderRadius: 12,
   },
   sellerHeader: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  sellerName: {
+    fontWeight: 'bold',
   },
   addToCartButton: {
     marginTop: 24,
