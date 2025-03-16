@@ -1,8 +1,10 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { router } from 'expo-router'
-import React from 'react'
-import { ScrollView, StyleSheet, View, Pressable, Animated } from 'react-native'
-import { Surface, Text, useTheme } from 'react-native-paper'
+"use client"
+
+import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { router } from "expo-router"
+import React from "react"
+import { ScrollView, StyleSheet, View, Pressable, Animated } from "react-native"
+import { Surface, Text, useTheme } from "react-native-paper"
 
 interface Category {
   id: string
@@ -15,11 +17,10 @@ interface CategoryListProps {
   categories: Category[]
   onCategoryPress?: (categoryId: string) => void
 }
-
 const CategoryItem: React.FC<{
-  category: Category;
-  onPress: () => void;
-  theme: any;
+  category: Category
+  onPress: () => void
+  theme: any
 }> = ({ category, onPress, theme }) => {
   const scaleAnim = React.useRef(new Animated.Value(1)).current
   
@@ -40,64 +41,72 @@ const CategoryItem: React.FC<{
       useNativeDriver: true,
     }).start()
   }
-  
+
   return (
-    <Animated.View
+    <View
       style={[
         styles.cardContainer,
-        { transform: [{ scale: scaleAnim }] }
+        {
+          shadowOpacity: 0.15,
+          shadowRadius: 4,
+          shadowOffset: { width: 0, height: 2 },
+          shadowColor: "#000",
+        },
       ]}
     >
-      <Surface
-        style={[
-          styles.card,
-          { backgroundColor: theme.colors.surfaceVariant }
-        ]}
-        elevation={3}
+      <Animated.View
+        style={{
+          transform: [{ scale: scaleAnim }],
+        }}
       >
-        <Pressable
-          android_ripple={{ color: theme.colors.surfaceVariant }}
-          style={({ pressed }) => [
-            styles.pressable,
-            { opacity: pressed ? 0.8 : 1 }
+        <Surface
+          style={[
+            styles.card,
+            {
+              backgroundColor: theme.colors.surfaceVariant,
+              borderColor: theme.colors.outline,
+            },
           ]}
-          onPress={onPress}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
+          elevation={2}
         >
-          <View style={styles.iconContainer}>
-            <MaterialCommunityIcons
-              name={
-                category.icon as keyof typeof MaterialCommunityIcons.glyphMap
-              }
-              size={32}
-              color={theme.colors.primary}
-            />
-          </View>
-          <View style={styles.textContainer}>
-            <Text 
-              variant="labelLarge" 
-              style={[styles.name, { color: theme.colors.onSurfaceVariant }]}
-              numberOfLines={1}
-            >
-              {category.name}
-            </Text>
-            <Text
-              variant="labelSmall"
-              style={{ color: theme.colors.onSurfaceVariant, opacity: 0.8 }}
-            >
-              {category.productCount} items
-            </Text>
-          </View>
-        </Pressable>
-      </Surface>
-    </Animated.View>
+          <Pressable
+            android_ripple={{ color: theme.colors.surfaceVariant }}
+            style={({ pressed }) => [styles.pressable, { opacity: pressed ? 0.8 : 1 }]}
+            onPress={onPress}
+            onPressIn={handlePressIn}
+            onPressOut={handlePressOut}
+          >
+            {/* Rest of your component remains the same */}
+            <View style={styles.iconContainer}>
+              <View style={[styles.iconBackground, { backgroundColor: theme.colors.primaryContainer }]}>
+                <MaterialCommunityIcons
+                  name={category.icon as keyof typeof MaterialCommunityIcons.glyphMap}
+                  size={32}
+                  color={theme.colors.primary}
+                />
+              </View>
+            </View>
+            <View style={styles.textContainer}>
+              <Text
+                variant="labelLarge"
+                style={[styles.name, { color: theme.colors.onSurfaceVariant }]}
+                numberOfLines={1}
+              >
+                {category.name}
+              </Text>
+              <Text variant="labelSmall" style={[styles.count, { color: theme.colors.onSurfaceVariant }]}>
+                {category.productCount} items
+              </Text>
+            </View>
+          </Pressable>
+        </Surface>
+      </Animated.View>
+    </View>
   )
 }
-
-const CategoryList: React.FC<CategoryListProps> = ({ 
+const CategoryList: React.FC<CategoryListProps> = ({
   categories,
-  onCategoryPress = (id) => router.push(`/category/${id}`)
+  onCategoryPress = (id) => router.push(`/(tabs)/(marketplace)/category/${id}`),
 }) => {
   const theme = useTheme()
 
@@ -107,11 +116,11 @@ const CategoryList: React.FC<CategoryListProps> = ({
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.container}
       decelerationRate="fast"
-      snapToInterval={122} // card width + margin
+      snapToInterval={130} // card width + margin
       snapToAlignment="center"
     >
       {categories.map((category) => (
-        <CategoryItem 
+        <CategoryItem
           key={category.id}
           category={category}
           onPress={() => onCategoryPress(category.id)}
@@ -124,37 +133,50 @@ const CategoryList: React.FC<CategoryListProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
-    paddingBottom: 16,
+    paddingHorizontal: 8,
+    paddingVertical: 12,
   },
   cardContainer: {
     marginHorizontal: 6,
   },
   card: {
-    width: 110,
-    borderRadius: 16,
-    overflow: 'hidden',
-    height: 110,
+    width: 118,
+    borderRadius: 20,
+    overflow: "hidden",
+    height: 130,
+    borderWidth: 0.5,
   },
   pressable: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 12,
   },
   iconContainer: {
-    padding: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 12,
+  },
+  iconBackground: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
   textContainer: {
-    padding: 8,
-    paddingTop: 0,
-    alignItems: 'center',
+    alignItems: "center",
   },
   name: {
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 2,
-    fontWeight: 'bold',
+    fontWeight: "600",
+    letterSpacing: 0.2,
+  },
+  count: {
+    textAlign: "center",
+    opacity: 0.8,
   },
 })
 

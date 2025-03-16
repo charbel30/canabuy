@@ -1,6 +1,7 @@
 import { Stack, router } from 'expo-router'
 import React from 'react'
 import { useTheme, IconButton } from 'react-native-paper'
+import { Platform } from 'react-native'
 
 import { StackHeader } from '@/lib'
 
@@ -12,17 +13,19 @@ const MarketplaceLayout = () => {
       screenOptions={{
         headerShown: true,
         header: (props) => <StackHeader navProps={props} children={undefined} />,
+        animation: Platform.OS === 'ios' ? 'default' : 'fade_from_bottom',
+        animationDuration: 200,
+        presentation: 'transparentModal',
         contentStyle: { 
           backgroundColor: theme.colors.background 
         },
-        animation: 'slide_from_right',
       }}
     >
       <Stack.Screen 
         name="index" 
         options={{
           title: 'Marketplace',
-          headerBackVisible: false,
+          headerBackButtonDisplayMode: 'minimal',
           headerShown: true,
           headerRight: () => (
             <IconButton
@@ -36,15 +39,16 @@ const MarketplaceLayout = () => {
         name="search" 
         options={{
           title: 'Search',
-          presentation: 'card',
+          presentation: 'transparentModal',
+          animation: Platform.OS === 'ios' ? 'default' : 'fade_from_bottom',
         }}
       />
       <Stack.Screen
         name="category/[id]"
         options={{
-          
           title: 'Category',
-          presentation: 'card',
+          presentation: 'transparentModal',
+          animation: Platform.OS === 'ios' ? 'default' : 'fade_from_bottom',
           headerRight: () => (
             <>
               <IconButton
@@ -63,7 +67,8 @@ const MarketplaceLayout = () => {
         name="product/[id]"
         options={{
           title: 'Product Details',
-          presentation: 'card',
+          presentation: 'transparentModal',
+          animation: Platform.OS === 'ios' ? 'default' : 'fade_from_bottom',
           headerRight: () => (
             <>
               <IconButton
