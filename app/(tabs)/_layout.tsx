@@ -16,6 +16,7 @@ const TabLayout = () => {
         header: (props) => <TabsHeader navProps={props} children={undefined} />,
       }}
     >
+      {/* Home Tab */}
       <Tabs.Screen
         name="index"
         options={{
@@ -42,11 +43,6 @@ const TabLayout = () => {
                 }
               >
                 <Menu.Item
-                  title={Locales.t('titleSettings')}
-                  leadingIcon="cog"
-                  onPress={() => router.push('/(tabs)/settings')}
-                />
-                <Menu.Item
                   title={Locales.t('stackNav')}
                   leadingIcon="card-multiple-outline"
                   onPress={() => router.push('/modal')}
@@ -63,6 +59,8 @@ const TabLayout = () => {
           ),
         }}
       />
+
+      {/* Profile Tab */}
       <Tabs.Screen
         name="profile"
         options={{
@@ -73,12 +71,6 @@ const TabLayout = () => {
                 <Appbar.Action
                   icon="magnify"
                   onPress={() => router.push('/search')}
-                />
-              </Tooltip>
-              <Tooltip title={Locales.t('titleSettings')}>
-                <Appbar.Action
-                  icon="cog"
-                  onPress={() => router.push('/(tabs)/settings')}
                 />
               </Tooltip>
             </>
@@ -92,6 +84,8 @@ const TabLayout = () => {
           ),
         }}
       />
+
+      {/* Marketplace Tab */}
       <Tabs.Screen
         name="(marketplace)"
         options={{
@@ -106,15 +100,32 @@ const TabLayout = () => {
           ),
         }}
       />
+
+      {/* 🔥 New Listing Tab (Replaces Settings) */}
       <Tabs.Screen
-        name="settings"
+        name="listing"
         options={{
-          title: Locales.t('titleSettings'),
+          title: 'Listing',
           tabBarIcon: (props) => (
             <MaterialCommunityIcons
               {...props}
               size={24}
-              name={props.focused ? 'cog' : 'cog-outline'}
+              name={props.focused ? 'plus-circle' : 'plus-circle-outline'}
+            />
+          ),
+        }}
+      />
+
+      {/* 🔥 New Checkout Tab */}
+      <Tabs.Screen
+        name="checkout"
+        options={{
+          title: 'Checkout',
+          tabBarIcon: (props) => (
+            <MaterialCommunityIcons
+              {...props}
+              size={24}
+              name={props.focused ? 'cart' : 'cart-outline'}
             />
           ),
         }}
