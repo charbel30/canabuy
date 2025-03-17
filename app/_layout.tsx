@@ -111,8 +111,12 @@ const RootLayoutNav = () => {
       <PaperProvider theme={theme}>
         <Stack
           screenOptions={{
-            animation: 'slide_from_bottom',
+            animation: Platform.OS === 'ios' ? 'default' : 'fade',
+            animationDuration: 200,
             headerShown: false, // Hide headers at root level to avoid duplication
+            contentStyle: {
+              backgroundColor: theme.colors.background,
+            },
           }}
         >
           <Stack.Screen name="(auth)" />
