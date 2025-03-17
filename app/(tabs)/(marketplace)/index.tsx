@@ -8,7 +8,7 @@ import { Text, useTheme, Button, Divider, Surface, IconButton, Modal, Portal } f
 import { GradientBackground } from "@/lib"
 import { CategoryList, ProductGrid, SearchBar } from "@/lib/ui/components/marketplace"
 
-// Enhanced mock data for demonstration
+// Enhanced mock data for demonstration.
 const mockCategories = [
   { id: "1", name: "Electronics", icon: "laptop", productCount: 150 },
   { id: "2", name: "Food & Beverage", icon: "food-apple", productCount: 200 },
