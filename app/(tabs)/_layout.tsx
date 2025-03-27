@@ -2,12 +2,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Tabs, router } from 'expo-router'
 import React from 'react'
 import { Appbar, Menu, Tooltip } from 'react-native-paper'
-
 import { Locales, TabBar, TabsHeader } from '@/lib'
 
 const TabLayout = () => {
   const [visible, setVisible] = React.useState(false)
-
+  
   return (
     <Tabs
       tabBar={(props) => <TabBar {...props} />}
@@ -59,7 +58,7 @@ const TabLayout = () => {
           ),
         }}
       />
-
+      
       {/* Profile Tab */}
       <Tabs.Screen
         name="profile"
@@ -84,7 +83,22 @@ const TabLayout = () => {
           ),
         }}
       />
-
+      
+      {/* Barcode Scanner Tab (in the middle) */}
+      <Tabs.Screen
+        name="scanner"
+        options={{
+          title: 'Scan',
+          tabBarIcon: (props) => (
+            <MaterialCommunityIcons
+              {...props}
+              size={24}
+              name={props.focused ? 'barcode-scan' : 'barcode-scan'}
+            />
+          ),
+        }}
+      />
+      
       {/* Marketplace Tab */}
       <Tabs.Screen
         name="(marketplace)"
@@ -100,8 +114,8 @@ const TabLayout = () => {
           ),
         }}
       />
-
-      {/* 🔥 New Listing Tab (Replaces Settings) */}
+      
+      {/* Listing Tab */}
       <Tabs.Screen
         name="listing"
         options={{
@@ -115,8 +129,8 @@ const TabLayout = () => {
           ),
         }}
       />
-
-      {/* 🔥 New Checkout Tab */}
+      
+      {/* Checkout Tab */}
       <Tabs.Screen
         name="checkout"
         options={{
