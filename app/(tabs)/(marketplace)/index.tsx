@@ -1,77 +1,90 @@
-"use client"
+'use client'
 
-import { router } from "expo-router"
-import React, { useState } from "react"
-import { View, ScrollView, StyleSheet, Image, Animated } from "react-native"
-import { Text, useTheme, Button, Divider, Surface, IconButton, Modal, Portal } from "react-native-paper"
+import { router } from 'expo-router'
+import React, { useState } from 'react'
+import { View, StyleSheet, Animated } from 'react-native'
+import {
+  Text,
+  useTheme,
+  Button,
+  Divider,
+  Surface,
+  IconButton,
+  Modal,
+  Portal,
+} from 'react-native-paper'
 
-import { GradientBackground } from "@/lib"
-import { CategoryList, ProductGrid, SearchBar } from "@/lib/ui/components/marketplace"
+import { GradientBackground } from '@/lib'
+import {
+  CategoryList,
+  ProductGrid,
+  SearchBar,
+} from '@/lib/ui/components/marketplace'
 
 // Enhanced mock data for demonstration.
 const mockCategories = [
-  { id: "1", name: "Electronics", icon: "laptop", productCount: 150 },
-  { id: "2", name: "Food & Beverage", icon: "food-apple", productCount: 200 },
-  { id: "3", name: "Clothing", icon: "tshirt-crew", productCount: 180 },
-  { id: "4", name: "Home & Garden", icon: "home", productCount: 120 },
-  { id: "5", name: "Sports", icon: "basketball", productCount: 95 },
-  { id: "6", name: "Books", icon: "book-open-variant", productCount: 210 },
-  { id: "7", name: "Beauty", icon: "face-woman", productCount: 130 },
+  { id: '1', name: 'Electronics', icon: 'laptop', productCount: 150 },
+  { id: '2', name: 'Food & Beverage', icon: 'food-apple', productCount: 200 },
+  { id: '3', name: 'Clothing', icon: 'tshirt-crew', productCount: 180 },
+  { id: '4', name: 'Home & Garden', icon: 'home', productCount: 120 },
+  { id: '5', name: 'Sports', icon: 'basketball', productCount: 95 },
+  { id: '6', name: 'Books', icon: 'book-open-variant', productCount: 210 },
+  { id: '7', name: 'Beauty', icon: 'face-woman', productCount: 130 },
 ]
 
 // More realistic product data with local images
 const mockProducts = [
   {
-    id: "1",
-    name: "Pure Canadian Maple Syrup",
+    id: '1',
+    name: 'Pure Canadian Maple Syrup',
     price: 19.99,
-    imageUrl: require("@/assets/images/products/clothing/winter-jacket.jpg"),
+    imageUrl: require('@/assets/images/products/clothing/winter-jacket.jpg'),
     canadianScore: 95,
     description:
-      "Pure Canadian maple syrup harvested from Quebec maple forests. 100% natural and traditionally processed.",
+      'Pure Canadian maple syrup harvested from Quebec maple forests. 100% natural and traditionally processed.',
   },
   {
-    id: "2",
-    name: "Winter Down Jacket",
+    id: '2',
+    name: 'Winter Down Jacket',
     price: 199.99,
-    imageUrl: require("@/assets/images/products/clothing/winter-jacket.jpg"),
+    imageUrl: require('@/assets/images/products/clothing/winter-jacket.jpg'),
     canadianScore: 90,
     description:
-      "Premium winter jacket designed for extreme Canadian winters. Ethically sourced down filling and water-resistant exterior.",
+      'Premium winter jacket designed for extreme Canadian winters. Ethically sourced down filling and water-resistant exterior.',
   },
   {
-    id: "3",
-    name: "Handcrafted Wooden Bowl",
+    id: '3',
+    name: 'Handcrafted Wooden Bowl',
     price: 49.99,
-    imageUrl: require("@/assets/images/products/clothing/winter-jacket.jpg"),
+    imageUrl: require('@/assets/images/products/clothing/winter-jacket.jpg'),
     canadianScore: 88,
     description:
-      "Handcrafted by Canadian artisans using locally sourced maple wood. Each piece is unique with natural grain patterns.",
+      'Handcrafted by Canadian artisans using locally sourced maple wood. Each piece is unique with natural grain patterns.',
   },
   {
-    id: "4",
-    name: "Organic Blueberry Jam",
+    id: '4',
+    name: 'Organic Blueberry Jam',
     price: 12.99,
-    imageUrl: require("@/assets/images/products/food/blueberry-jam.jpg"),
+    imageUrl: require('@/assets/images/products/food/blueberry-jam.jpg'),
     canadianScore: 92,
     description:
-      "Made with wild Canadian blueberries harvested from pristine forests. No artificial preservatives or additives.",
+      'Made with wild Canadian blueberries harvested from pristine forests. No artificial preservatives or additives.',
   },
   {
-    id: "5",
-    name: "Smart Speaker",
+    id: '5',
+    name: 'Smart Speaker',
     price: 79.99,
-    imageUrl: require("@/assets/images/products/electronics/smart-speaker.jpg"),
+    imageUrl: require('@/assets/images/products/electronics/smart-speaker.jpg'),
     canadianScore: 85,
-    description: "High-quality smart speaker designed and manufactured in Canada with premium sound quality.",
+    description: 'High-quality smart speaker designed and manufactured in Canada with premium sound quality.',
   },
   {
-    id: "6",
-    name: "Wireless Earbuds",
+    id: '6',
+    name: 'Wireless Earbuds',
     price: 129.99,
-    imageUrl: require("@/assets/images/products/electronics/wireless-earbuds.jpg"),
+    imageUrl: require('@/assets/images/products/electronics/wireless-earbuds.jpg'),
     canadianScore: 82,
-    description: "Premium wireless earbuds with noise cancellation and long battery life. Designed in Vancouver.",
+    description: 'Premium wireless earbuds with noise cancellation and long battery life. Designed in Vancouver.',
   },
 ]
 
@@ -79,7 +92,7 @@ const mockProducts = [
 
 const MarketplaceScreen = () => {
   const theme = useTheme()
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchQuery, setSearchQuery] = useState('')
   const [filterModalVisible, setFilterModalVisible] = useState(false)
   const [wishlistedProducts, setWishlistedProducts] = useState<string[]>([])
 
@@ -88,19 +101,19 @@ const MarketplaceScreen = () => {
   const headerOpacity = scrollY.interpolate({
     inputRange: [0, 50, 100],
     outputRange: [1, 0.8, 0],
-    extrapolate: "clamp",
+    extrapolate: 'clamp',
   })
 
   const headerTranslateY = scrollY.interpolate({
     inputRange: [0, 100],
     outputRange: [0, -50],
-    extrapolate: "clamp",
+    extrapolate: 'clamp',
   })
 
   const handleSearchSubmit = () => {
     if (searchQuery.trim()) {
       router.push({
-        pathname: "/(tabs)/(marketplace)/search",
+        pathname: '/(tabs)/(marketplace)/search',
         params: { query: searchQuery },
       })
     }
@@ -116,8 +129,16 @@ const MarketplaceScreen = () => {
     setFilterModalVisible(true)
   }
 
+  // Helper function to get color based on Canadian score
+  const getScoreColor = (score: number) => {
+    if (score >= 90) return '#00796B' // Dark teal
+    if (score >= 70) return '#4CAF50' // Green
+    if (score >= 50) return '#FFC107' // Amber
+    return '#F44336' // Red
+  }
+
   return (
-    <View style={styles.container}>
+    <Surface style={styles.container}>
       <GradientBackground height="half" />
 
       {/* Animated Header */}
@@ -143,7 +164,10 @@ const MarketplaceScreen = () => {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
-        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true },
+        )}
         scrollEventThrottle={16}
       >
         {/* Search Bar */}
@@ -157,6 +181,43 @@ const MarketplaceScreen = () => {
           />
         </View>
 
+        {/* Canadian Score Explanation */}
+        <View style={styles.scoreExplanationContainer}>
+          <Text variant="titleSmall" style={styles.scoreExplanationTitle}>
+            Canadian Score
+          </Text>
+          <View style={styles.scoreExplanationContent}>
+            <View style={styles.scoreItem}>
+              <View style={[
+                styles.scoreIndicator,
+                { backgroundColor: getScoreColor(95) },
+              ]} />
+              <Text variant="bodySmall">90-100: Excellent</Text>
+            </View>
+            <View style={styles.scoreItem}>
+              <View style={[
+                styles.scoreIndicator,
+                { backgroundColor: getScoreColor(75) },
+              ]} />
+              <Text variant="bodySmall">70-89: Good</Text>
+            </View>
+            <View style={styles.scoreItem}>
+              <View style={[
+                styles.scoreIndicator,
+                { backgroundColor: getScoreColor(55) },
+              ]} />
+              <Text variant="bodySmall">50-69: Fair</Text>
+            </View>
+            <View style={styles.scoreItem}>
+              <View style={[
+                styles.scoreIndicator,
+                { backgroundColor: getScoreColor(30) },
+              ]} />
+              <Text variant="bodySmall">0-49: Poor</Text>
+            </View>
+          </View>
+        </View>
+
         {/* Categories Section */}
         <View style={styles.categoriesContainer}>
           <View style={styles.sectionHeader}>
@@ -166,8 +227,9 @@ const MarketplaceScreen = () => {
             <Button
               mode="text"
               compact
-              onPress={() => console.log("View all categories")}
+              onPress={() => console.log('View all categories')}
               labelStyle={styles.seeAllButton}
+              icon="chevron-right"
             >
               See All
             </Button>
@@ -186,15 +248,16 @@ const MarketplaceScreen = () => {
             <Button
               mode="text"
               compact
-              onPress={() => console.log("View all products")}
+              onPress={() => console.log('View all products')}
               labelStyle={styles.seeAllButton}
+              icon="chevron-right"
             >
               See All
             </Button>
           </View>
           <ProductGrid
             products={mockProducts}
-            useScrollView={true}
+            useScrollView
             wishlistedProducts={wishlistedProducts}
             onWishlistToggle={handleWishlistToggle}
           />
@@ -206,13 +269,20 @@ const MarketplaceScreen = () => {
         <Modal
           visible={filterModalVisible}
           onDismiss={() => setFilterModalVisible(false)}
-          contentContainerStyle={[styles.modalContainer, { backgroundColor: theme.colors.surface }]}
+          contentContainerStyle={[
+            styles.modalContainer,
+            { backgroundColor: theme.colors.surface },
+          ]}
         >
           <View style={styles.modalHeader}>
             <Text variant="titleLarge" style={styles.modalTitle}>
               Filter Products
             </Text>
-            <IconButton icon="close" onPress={() => setFilterModalVisible(false)} style={styles.modalCloseButton} />
+            <IconButton 
+              icon="close"
+              onPress={() => setFilterModalVisible(false)}
+              style={styles.modalCloseButton}
+            />
           </View>
           <Divider />
           <View style={styles.modalContent}>
@@ -221,28 +291,49 @@ const MarketplaceScreen = () => {
             </Text>
             {/* Price range slider would go here */}
             <View style={styles.priceRangeContainer}>
-              <Surface style={[styles.priceInput, { backgroundColor: theme.colors.surfaceVariant }]}>
-                <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+              <Surface style={[
+                styles.priceInput,
+                { backgroundColor: theme.colors.surfaceVariant },
+              ]}>
+                <Text 
+                  variant="bodySmall"
+                  style={{ color: theme.colors.onSurfaceVariant }}
+                >
                   Min
                 </Text>
-                <Text variant="bodyLarge" style={{ color: theme.colors.onSurface }}>
+                <Text 
+                  variant="bodyLarge"
+                  style={{ color: theme.colors.onSurface }}
+                >
                   $0
                 </Text>
               </Surface>
               <Text variant="bodyLarge" style={{ marginHorizontal: 8 }}>
                 -
               </Text>
-              <Surface style={[styles.priceInput, { backgroundColor: theme.colors.surfaceVariant }]}>
-                <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+              <Surface style={[
+                styles.priceInput,
+                { backgroundColor: theme.colors.surfaceVariant },
+              ]}>
+                <Text 
+                  variant="bodySmall"
+                  style={{ color: theme.colors.onSurfaceVariant }}
+                >
                   Max
                 </Text>
-                <Text variant="bodyLarge" style={{ color: theme.colors.onSurface }}>
+                <Text 
+                  variant="bodyLarge"
+                  style={{ color: theme.colors.onSurface }}
+                >
                   $500
                 </Text>
               </Surface>
             </View>
 
-            <Text variant="titleMedium" style={[styles.modalSectionTitle, { marginTop: 24 }]}>
+            <Text 
+              variant="titleMedium"
+              style={[styles.modalSectionTitle, { marginTop: 24 }]}
+            >
               Canadian Score
             </Text>
             <View style={styles.scoreFilterContainer}>
@@ -265,7 +356,7 @@ const MarketplaceScreen = () => {
           </View>
         </Modal>
       </Portal>
-    </View>
+    </Surface>
   )
 }
 
@@ -273,8 +364,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  scoreExplanationContainer: {
+    marginHorizontal: 16,
+    marginVertical: 12,
+    padding: 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: 8,
+  },
+  scoreExplanationTitle: {
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  scoreExplanationContent: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  scoreItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 4,
+    width: '48%',
+  },
+  scoreIndicator: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    marginRight: 6,
+  },
   headerContainer: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
@@ -283,12 +402,12 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   headerTitle: {
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 4,
   },
   headerSubtitle: {
-    textAlign: "center",
+    textAlign: 'center',
     opacity: 0.8,
   },
   scrollView: {
@@ -306,18 +425,18 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   sectionHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 16,
     marginBottom: 8,
   },
   sectionTitle: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     letterSpacing: 0.2,
   },
   seeAllButton: {
-    fontWeight: "500",
+    fontWeight: '500',
   },
   featuredScroll: {
     paddingHorizontal: 8,
@@ -328,26 +447,26 @@ const styles = StyleSheet.create({
     height: 220,
     marginHorizontal: 8,
     borderRadius: 20,
-    overflow: "hidden",
+    overflow: 'hidden',
     borderWidth: 0.5,
   },
   dealImage: {
-    width: "100%",
+    width: '100%',
     height: 120,
   },
   dealImageOverlay: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     height: 120,
-    backgroundColor: "rgba(0,0,0,0.2)",
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
   dealContent: {
     padding: 16,
   },
   dealTitle: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 4,
   },
   dealDescription: {
@@ -355,7 +474,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   dealButton: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     borderRadius: 20,
   },
   categoriesContainer: {
@@ -371,17 +490,17 @@ const styles = StyleSheet.create({
   modalContainer: {
     margin: 20,
     borderRadius: 20,
-    overflow: "hidden",
+    overflow: 'hidden',
     elevation: 5,
   },
   modalHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 16,
   },
   modalTitle: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   modalCloseButton: {
     margin: 0,
@@ -394,9 +513,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   priceRangeContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   priceInput: {
     flex: 1,
@@ -407,16 +526,16 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   scoreFilterItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 12,
     borderRadius: 12,
     marginBottom: 8,
   },
   modalActions: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     marginTop: 32,
   },
   modalButton: {
