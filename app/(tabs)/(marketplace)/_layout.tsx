@@ -1,7 +1,7 @@
 import { Stack, router } from 'expo-router'
 import React from 'react'
-import { useTheme, IconButton } from 'react-native-paper'
 import { Platform } from 'react-native'
+import { useTheme, IconButton, Tooltip } from 'react-native-paper'
 
 import { StackHeader } from '@/lib'
 
@@ -12,31 +12,43 @@ const MarketplaceLayout = () => {
     <Stack
       screenOptions={{
         headerShown: true,
-        header: (props) => <StackHeader navProps={props} children={undefined} />,
+        header: (props) => (
+          <StackHeader navProps={props} children={undefined} />
+        ),
         animation: Platform.OS === 'ios' ? 'default' : 'fade_from_bottom',
         animationDuration: 200,
         presentation: 'transparentModal',
-        contentStyle: { 
-          backgroundColor: theme.colors.background 
+        contentStyle: {
+          backgroundColor: theme.colors.background,
         },
       }}
     >
-      <Stack.Screen 
-        name="index" 
+      <Stack.Screen
+        name="index"
         options={{
           title: 'Marketplace',
           headerBackButtonDisplayMode: 'minimal',
           headerShown: true,
           headerRight: () => (
-            <IconButton
-              icon="magnify"
-              onPress={() => router.push('/(tabs)/(marketplace)/search')}
-            />
+            <>
+              <Tooltip title="Search">
+                <IconButton
+                  icon="magnify"
+                  onPress={() => router.push('/(tabs)/(marketplace)/search')}
+                />
+              </Tooltip>
+              <Tooltip title="Checkout">
+`                <IconButton
+                  icon="cart"
+                  onPress={() => router.push('/(tabs)/(marketplace)/checkout')}
+                />`
+              </Tooltip>
+            </>
           ),
         }}
       />
-      <Stack.Screen 
-        name="search" 
+      <Stack.Screen
+        name="search"
         options={{
           title: 'Search',
           presentation: 'transparentModal',

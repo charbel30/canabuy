@@ -22,12 +22,7 @@ const TabLayout = () => {
           title: Locales.t('titleHome'),
           headerRight: () => (
             <>
-              <Tooltip title={Locales.t('search')}>
-                <Appbar.Action
-                  icon="magnify"
-                  onPress={() => router.push('/search')}
-                />
-              </Tooltip>
+          
               <Menu
                 statusBarHeight={48}
                 visible={visible}
@@ -60,29 +55,7 @@ const TabLayout = () => {
       />
       
       {/* Profile Tab */}
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: Locales.t('profile'),
-          headerRight: () => (
-            <>
-              <Tooltip title={Locales.t('search')}>
-                <Appbar.Action
-                  icon="magnify"
-                  onPress={() => router.push('/search')}
-                />
-              </Tooltip>
-            </>
-          ),
-          tabBarIcon: (props) => (
-            <MaterialCommunityIcons
-              {...props}
-              size={24}
-              name={props.focused ? 'account' : 'account-outline'}
-            />
-          ),
-        }}
-      />
+    
       
       {/* Barcode Scanner Tab (in the middle) */}
       <Tabs.Screen
@@ -98,7 +71,20 @@ const TabLayout = () => {
           ),
         }}
       />
-      
+        {/* Listing Tab */}
+        <Tabs.Screen
+        name="listing"
+        options={{
+          title: 'Listing',
+          tabBarIcon: (props) => (
+            <MaterialCommunityIcons
+              {...props}
+              size={24}
+              name={props.focused ? 'plus-circle' : 'plus-circle-outline'}
+            />
+          ),
+        }}
+      />
       {/* Marketplace Tab */}
       <Tabs.Screen
         name="(marketplace)"
@@ -115,36 +101,22 @@ const TabLayout = () => {
         }}
       />
       
-      {/* Listing Tab */}
-      <Tabs.Screen
-        name="listing"
+    
+        <Tabs.Screen
+        name="profile"
         options={{
-          title: 'Listing',
+          title: Locales.t('profile'),
           tabBarIcon: (props) => (
             <MaterialCommunityIcons
               {...props}
               size={24}
-              name={props.focused ? 'plus-circle' : 'plus-circle-outline'}
-            />
-          ),
-        }}
-      />
-      
-      {/* Checkout Tab */}
-      <Tabs.Screen
-        name="checkout"
-        options={{
-          title: 'Checkout',
-          tabBarIcon: (props) => (
-            <MaterialCommunityIcons
-              {...props}
-              size={24}
-              name={props.focused ? 'cart' : 'cart-outline'}
+              name={props.focused ? 'account' : 'account-outline'}
             />
           ),
         }}
       />
     </Tabs>
+    
   )
 }
 
