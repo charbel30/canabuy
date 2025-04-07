@@ -38,10 +38,10 @@ const MarketplaceLayout = () => {
                 />
               </Tooltip>
               <Tooltip title="Checkout">
-`                <IconButton
+                <IconButton
                   icon="cart"
                   onPress={() => router.push('/(tabs)/(marketplace)/checkout')}
-                />`
+                />
               </Tooltip>
             </>
           ),
