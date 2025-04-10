@@ -12,11 +12,14 @@ import { SplashScreen, Stack } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { Platform, useColorScheme } from 'react-native'
+import { LogBox , Platform, useColorScheme } from 'react-native'
 import { adaptNavigationTheme, PaperProvider } from 'react-native-paper'
 
 import { Locales, Setting, StackHeader, Themes } from '@/lib'
 
+LogBox.ignoreLogs([
+  'Warning: A props object containing a "key" prop is being spread into JSX:',
+])
 // Catch any errors thrown by the Layout component.
 export { ErrorBoundary } from 'expo-router'
 
