@@ -42,34 +42,17 @@ Ensure the following are installed on your system:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/youzarsiph/expo-react-native-paper.git
-   cd expo-react-native-paper
+   git clone https://github.com/charbel30/canabuy.git
+   cd canabuy
    ```
 
-2. **Customize the Project**
-
-   Open the `package.json` file to update the application name:
-
-   ```jsonc
-   {
-     "name": "your-app-name",
-     ...
-   }
-   ```
-
-3. **Install Dependencies**
+2. **Install Dependencies**
 
    ```bash
    npm install
    ```
 
-4. **Run the Application**
-
-   ```bash
-   npm start
-   ```
-
-5. **Set Up Android Emulator (Pixel 9, API 35)**
+3. **Set Up Android Emulator (Pixel 9, API 35)**
 
 To run the app on Android, set up an emulator using Android Studio:
 
@@ -84,7 +67,7 @@ To run the app on Android, set up an emulator using Android Studio:
 
 > 🚨 **Important:** Make sure the emulator is running **before** you execute `npm start`.
 
-6. **Run the Application**
+4. **Run the Application**
 
    Once the emulator is running, start the Expo development server:
 
