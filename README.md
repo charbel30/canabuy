@@ -90,7 +90,8 @@ To run the app on Android, set up an emulator using Android Studio:
 
    ```bash
    npm start
-
+   then press a in the terminal
+   ```
 
 ## Built With
 
