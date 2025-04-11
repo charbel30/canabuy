@@ -1,12 +1,5 @@
 # CanaBuy – Support Local with Confidence 🇨🇦
 
-[![EAS Build](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/eas-build.yml/badge.svg)](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/eas-build.yml)
-[![EAS Review](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/eas-reviews.yml/badge.svg)](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/eas-reviews.yml)
-[![EAS Update](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/eas-update.yml/badge.svg)](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/eas-update.yml)
-[![CodeQL](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/codeql.yml/badge.svg)](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/codeql.yml)
-[![ESLint](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/eslint.yml/badge.svg)](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/eslint.yml)
-[![Prettier](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/prettier.yml/badge.svg)](https://github.com/youzarsiph/expo-react-native-paper/actions/workflows/prettier.yml)
-
 ## Overview
 
 **CanaBuy** is a cross-platform mobile application that helps Canadian consumers identify and purchase Canadian-made products. Created in response to recent international trade tensions and rising interest in economic patriotism, CanaBuy provides users with tools to scan product barcodes, view Canadian alternatives, and shop within a marketplace tailored to locally sourced goods.
@@ -85,14 +78,6 @@ To run the app on Android, set up an emulator using Android Studio:
 - **Expo** - A platform for universal React applications.
 - **Expo Router** - A flexible and efficient routing solution for React Native.
 - **React Native Paper** - A component library implementing Material Design.
-
-## Code Quality
-
-We enforce high code quality through automated checks:
-
-- **CodeQL**: Security scans for identifying vulnerabilities.
-- **ESLint**: JavaScript linting to maintain code consistency.
-- **Prettier**: Code formatting to ensure uniformity.
 
 ## Acknowledgments
 
