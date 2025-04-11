@@ -20,30 +20,6 @@ const TabLayout = () => {
         name="index"
         options={{
           title: Locales.t('titleHome'),
-          headerRight: () => (
-            <>
-          
-              <Menu
-                statusBarHeight={48}
-                visible={visible}
-                onDismiss={() => setVisible(false)}
-                anchor={
-                  <Tooltip title={Locales.t('options')}>
-                    <Appbar.Action
-                      icon="dots-vertical"
-                      onPress={() => setVisible(true)}
-                    />
-                  </Tooltip>
-                }
-              >
-                <Menu.Item
-                  title={Locales.t('stackNav')}
-                  leadingIcon="card-multiple-outline"
-                  onPress={() => router.push('/modal')}
-                />
-              </Menu>
-            </>
-          ),
           tabBarIcon: (props) => (
             <MaterialCommunityIcons
               {...props}

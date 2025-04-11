@@ -1,3 +1,6 @@
+// Import LogBox configuration early
+
+
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { JetBrainsMono_400Regular } from '@expo-google-fonts/jetbrains-mono'
 import { NotoSans_400Regular } from '@expo-google-fonts/noto-sans'
@@ -12,14 +15,12 @@ import { SplashScreen, Stack } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
 import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { LogBox , Platform, useColorScheme } from 'react-native'
+import { Platform, useColorScheme } from 'react-native'
 import { adaptNavigationTheme, PaperProvider } from 'react-native-paper'
 
 import { Locales, Setting, StackHeader, Themes } from '@/lib'
 
-LogBox.ignoreLogs([
-  'Warning: A props object containing a "key" prop is being spread into JSX:',
-])
+// LogBox configuration moved to logbox-config.ts
 // Catch any errors thrown by the Layout component.
 export { ErrorBoundary } from 'expo-router'
 
