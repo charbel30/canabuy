@@ -73,7 +73,7 @@ To run the app on Android, set up an emulator using Android Studio:
    (if it is press a in the terminal)
    
 
-   if you receive an error from the expoCLI after npm start in expo go. this caused from ReactNativePaper module
+   if you receive an error from the expoCLI after npm start in expo go. this is caused from the ReactNativePaper module
 
 ## Built With
 
