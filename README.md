@@ -28,50 +28,6 @@ The `expo-react-native-paper` repository provides a robust boilerplate for devel
 - iOS
 - Android
 
-### Screenshots
-
-Below are screenshots showcasing various screens of the application:
-
-- **Home Screen (Tabs)**
-
-  ![Home Screen (Tabs)](assets/screenshots/home-default-light.png)
-
-- **Profile Screen (Tabs)**
-
-  ![Profile Screen (Tabs)](assets/screenshots/profile-teal-dark.png)
-
-- **Settings Screen (Tabs)**
-
-  ![Settings Screen (Tabs)](assets/screenshots/settings-lime-light.png)
-
-- **Modal Screen (Stack)**
-
-  ![Modal Screen (Stack)](assets/screenshots/modal-light-red.png)
-
-- **Search Screen (Stack)**
-
-  ![Search Screen (Stack)](assets/screenshots/search-orange-dark.png)
-
-- **Login Screen (Stack)**
-
-  ![Login Screen (Stack)](assets/screenshots/login-violet-light.png)
-
-- **Signup Screen (Stack)**
-
-  ![Signup Screen (Stack)](assets/screenshots/signup-green-dark.png)
-
-- **Home Screen (Drawer)**
-
-  ![Home Screen (Drawer)](assets/screenshots/home-blue-dark.png)
-
-- **Profile Screen (Drawer)**
-
-  ![Profile Screen (Drawer)](assets/screenshots/profile-olive-light.png)
-
-- **Settings Screen (Drawer)**
-
-  ![Settings Screen (Drawer)](assets/screenshots/settings-violet-light.png)
-
 ## Getting Started
 
 ### Prerequisites
@@ -112,6 +68,29 @@ Ensure the following are installed on your system:
    ```bash
    npm start
    ```
+
+5. **Set Up Android Emulator (Pixel 9, API 35)**
+
+To run the app on Android, set up an emulator using Android Studio:
+
+1. **Download and Install [Android Studio](https://developer.android.com/studio)**.
+2. Open Android Studio and go to **Tools > Device Manager**.
+3. Click **Create Device**, then:
+   - Choose **Phone** > **Pixel 9** and click **Next**.
+   - Choose **API Level 35** (Android 14) system image and download it if necessary.
+   - Name your virtual device (e.g., `Pixel_9_API_35`) and finish setup.
+
+4. Once created, **launch the emulator** by clicking the play ▶️ icon next to the device.
+
+> 🚨 **Important:** Make sure the emulator is running **before** you execute `npm start`.
+
+6. **Run the Application**
+
+   Once the emulator is running, start the Expo development server:
+
+   ```bash
+   npm start
+
 
 ## Built With
 
@@ -174,7 +153,8 @@ This project is licensed under the MIT License. For more information, see the [L
 
 ## Related Projects
 
-- [**expo-material**](https://github.com/youzarsiph/expo-material): Enhances Expo's default setup with Material Design elements.
+- [**expo-material**](https://gi
+thub.com/youzarsiph/expo-material): Enhances Expo's default setup with Material Design elements.
 - [**expo-material-tabs**](https://github.com/youzarsiph/expo-material-tabs): Expands the `expo-material` template with tab navigation.
 - [**expo-material-drawer**](https://github.com/youzarsiph/expo-material-drawer): Integrates a side drawer navigation system into the `expo-material` template.
 - [**expo-drive**](https://github.com/youzarsiph/expo-drive): A template replicating the Google Drive user interface, providing a familiar and intuitive design.
